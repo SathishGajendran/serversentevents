@@ -1,0 +1,28 @@
+<html>
+
+<head>
+    <title>SSE</title>
+    <style type="text/css">
+        #content {
+            font-size: 189px;
+            color: orangered;
+            top: 30%;
+            position: absolute;
+            right: 19%;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="content">Loading...</span>
+    <script>
+        var es = new EventSource("/sse");
+        es.onmessage = function (event) {
+            let serverData = JSON.parse(event.data);
+            console.log(serverData);
+            document.getElementById('content').innerHTML = new Date(serverData.data).toLocaleTimeString();
+        };
+    </script>
+</body>
+
+</html>
